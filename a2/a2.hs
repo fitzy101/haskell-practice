@@ -16,3 +16,14 @@ join xs ys = [ (a, b, d) |
                (a, b) <- xs,
                (c, d) <- ys,
                a == c ]
+
+ljoin :: Eq a => [(a,b)] -> [(a,c)] -> [(a,b,Maybe c)]
+ljoin xs ys = [
+                (a, b, x) |
+                (a, b) <- xs,
+                (c, d) <- ys,
+                let x = (\a c -> if a == c
+                                 then d
+                                 else Nothing)
+              ]
+
