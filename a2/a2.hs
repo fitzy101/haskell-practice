@@ -1,3 +1,4 @@
+module A2 where
 -- Insert a at the index n in the list xs.
 insertAt :: Int -> a -> [a] -> [a]
 insertAt n a xs = as ++ [a] ++ bs
@@ -17,8 +18,9 @@ join xs ys = [ (a, b, d) |
                (c, d) <- ys,
                a == c ]
 
-a = [(1, 'a'), (2, 'b')]
-b = [(2, True)]
+-- | Doctest example
+-- >>> ljoin [(1, 'a'), (2, 'b')] [(2, True)]
+-- [(1,'a',Nothing),(2,'b',Just True)]
 ljoin :: Eq a => [(a,b)] -> [(a,c)] -> [(a,b,Maybe c)]
 ljoin xs ys = [
                 (a, b, x) |
