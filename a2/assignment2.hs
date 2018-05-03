@@ -80,7 +80,7 @@ isBalanced (Node a b) = let d = (size a - size b)
 
 
 ------ Question 6.
--- | isNumber - test if a string contains a valid number, as defined by
+-- isNumber - test if a string contains a valid number, as defined by
 --   number -> .digit+ | digit+ [.digit*] 
 --  >>> isNumber .5
 --  True
