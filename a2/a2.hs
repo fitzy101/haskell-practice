@@ -18,9 +18,12 @@ join xs ys = [ (a, b, d) |
                (c, d) <- ys,
                a == c ]
 
--- | Doctest example
+-- | ljoin - Create a list of triples from 2 lists of tuples, where the first
+--   element matches in the two lists.
 -- >>> ljoin [(1, 'a'), (2, 'b')] [(2, True)]
 -- [(1,'a',Nothing),(2,'b',Just True)]
+-- >>> ljoin [(1, 'a'), (2, 'b'), (3, 'd')] [(1, 20), (2, 30)]
+-- [(1,'a',Just 20),(1,'a',Nothing),(2,'b',Nothing),(2,'b',Just 30),(3,'d',Nothing),(3,'d',Nothing)]
 ljoin :: Eq a => [(a,b)] -> [(a,c)] -> [(a,b,Maybe c)]
 ljoin xs ys = [
                 (a, b, x) |
