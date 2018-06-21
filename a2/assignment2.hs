@@ -1,5 +1,5 @@
 module Assignment2 where
-
+import Data.Char (isDigit)
 
 ------ Question1.
 -- | insertAt - Insert a at the index n in the list xs.
@@ -80,22 +80,46 @@ isBalanced (Node a b) = let d = (size a - size b)
 
 
 ------ Question 6.
+someDigits :: String -> Bool
+someDigits "" = False
+someDigits xs = any (isDigit) xs
+
 -- isNumber - test if a string contains a valid number, as defined by
 --   number -> .digit+ | digit+ [.digit*] 
---  >>> isNumber .5
+--  >>> isNumber ".5"
 --  True
---  >>> isNumber 1.5
+--  >>> isNumber "1.5"
 --  True
---  >>> isNumber 1
+--  >>> isNumber "1"
 --  True
---  >>> isNumber 1.
+--  >>> isNumber "1."
 --  True
---  >>> isNumber 0.1
+--  >>> isNumber "0.1"
 --  True
 --  >>> isNumber "abc"
 --  False
---  >>> isNumber True
---  False
--- isNumber :: String -> Bool
--- isNumber a = []
+isNumber :: String -> Bool
+isNumber xs
+    | xs == "." = False
+    | otherwise = someDigits xs && all (\a -> isDigit a || a == '.') xs 
+
+------ Question 7.
+elemOrNothing :: Int -> [a] -> Maybe a
+elemOrNothing a [] = Nothing
+elemOrNothing a bs
+  | a >= length bs = Nothing
+  | otherwise = Just (bs!!a)
+
+-- getElems - return the given elements of a list if they exist.
+-- >>> getElems [2,4] [1..10]
+-- [Just 3,Just 5]
+-- >>> getElems [2,4] [1..4]
+-- [Just 3,Nothing]
+getElems :: [Int] -> [a] -> [Maybe a]
+getElems [] []  = []
+getElems [] bs  = []
+getElems as []  = []
+getElems as bs  = [ x |
+                    a <- as,
+                    let x = elemOrNothing a bs ]
 
